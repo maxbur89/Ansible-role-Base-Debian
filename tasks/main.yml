@@ -1,0 +1,35 @@
+---
+# tasks file for base_debian
+
+- name: Install base packets
+  apt:
+       update_cache: yes
+       state: present
+       pkg:
+       - arping
+       - tcpdump
+       - ethtool
+       - vlan
+       - dnsutils
+       - htop
+       - mc
+       - joe
+       - dstat
+       - nmap
+       - bmon
+       - iotop
+       - smartmontools
+       - reboot-notifier
+       - sysstat
+       - iptables
+
+- name: Sysctl settings (disable IPv6)
+  sysctl:
+      name: "{{ item.name }}"
+      value: "{{ item.value }}"
+      state: present
+      sysctl_set: yes
+      reload: yes
+  with_items:
+      - { name: 'net.ipv6.conf.all.disable_ipv6', value: '1' }
+      - { name: 'net.ipv6.conf.default.disable_ipv6', value: '1' }
