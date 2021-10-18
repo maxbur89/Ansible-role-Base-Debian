@@ -22,6 +22,7 @@
        - reboot-notifier
        - sysstat
        - iptables
+       - net-tools
 
 - name: Sysctl settings (disable IPv6)
   sysctl:
